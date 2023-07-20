@@ -5,11 +5,6 @@ import openai
 from elevenlabs import generate, play, set_api_key, save
 from PIL import Image
 
-# input parameters
-# input_file = 'yv60s-o2552.wav'
-# output_file = 'test.wav'
-# speech to text
-# openai.api_key = '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'
 
 def stt(input_audio):
 	aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
@@ -53,7 +48,7 @@ def main():
 		key = st.text_input('Movie title', 'Life of Brian')
 		# st.write('The current movie title is', title)
 		
-		itext = stt(input_file)
+		itext = stt(audio_bytes)
 		st.write(f'Transcript of your input file: {itext}')
 
 		otext = ttt(itext, key)
