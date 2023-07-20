@@ -9,7 +9,6 @@ from PIL import Image
 input_file = 'yv60s-o2552.wav'
 output_file = 'test.wav'
 # aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
-# openai.api_key = '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'
 # set_api_key("e47386203d3800a7d57840c1649afb38")
 
 input_file = st.file_uploader("Choose a file")
