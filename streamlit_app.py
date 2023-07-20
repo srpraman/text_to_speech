@@ -6,20 +6,74 @@ from elevenlabs import generate, play, set_api_key, save
 from PIL import Image
 
 # input parameters
-input_file = 'yv60s-o2552.wav'
-output_file = 'test.wav'
-# aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
-# set_api_key("e47386203d3800a7d57840c1649afb38")
+# input_file = 'yv60s-o2552.wav'
+# output_file = 'test.wav'
+# speech to text
+# openai.api_key = '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'
 
-input_file = st.file_uploader("Choose a file")
-if input_file is not None:
-    # To read file as bytes:
-    # bytes_data = uploaded_file.getvalue()
-    # st.write(bytes_data)
-# host on web
-	audio_bytes = input_file.read()
-	st.write("Input audio file")
-	st.audio(audio_bytes, format='audio/wav')
+def stt(input_audio):
+	aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
+	transcriber = aai.Transcriber()
+	transcript = transcriber.transcribe(input_audio)
+	return transcript.text
+
+# text to text translation
+def ttt(input_text, key, command = 'convert this speech to Hindi:'):
+	openai.api_key = key
+	messages = [ {"role": "system", "content":
+			"You are a intelligent assistant."} ]
+	message = command + input_text 
+	if message:
+		messages.append(
+		{"role": "user", "content": message},
+		)
+		chat = openai.ChatCompletion.create(
+			model="gpt-3.5-turbo", messages=messages
+		)
+	reply = chat.choices[0].message.content
+	return reply
+
+def tts(output_text):
+	set_api_key("e47386203d3800a7d57840c1649afb38")
+	audio = generate(
+    text=output_text,
+    voice="Arnold", model='eleven_multilingual_v1')
+	# save(audio,output_file_name)
+	# return output_file_name
+	return audio
+
+def main():
+
+	input_file = st.file_uploader("Choose a file")
+	if input_file is not None:
+		audio_bytes = input_file.read()
+		st.write("Input audio file")
+		st.audio(audio_bytes, format='audio/wav')
+		
+		key = st.text_input('Movie title', 'Life of Brian')
+		# st.write('The current movie title is', title)
+		
+		itext = stt(input_file)
+		st.write(f'Transcript of your input file: {itext}')
+
+		otext = ttt(itext, key)
+		st.write(f"Hindi Translation: {otext}")
+
+		output_file = tts(otext).read()
+		st.write("Output audio file")
+		st.audio(output_file, format='audio/wav')
+
+	else:
+		# pipeline diagram
+		st.write("Invalid file!!!!")
+
+	image = Image.open('worlflow.png')
+	st.image(image, caption='FLow Diagram')
+
+main()
+
+
+
 
 '''# speech to text
 transcriber = aai.Transcriber()
@@ -52,6 +106,4 @@ audio_file = open(output_file, 'rb')
 audio_bytes = audio_file.read()
 st.audio(audio_bytes)'''
 
-# pipeline diagram
-image = Image.open('worlflow.png')
-st.image(image, caption='FLow Diagram')
+
