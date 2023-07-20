@@ -8,17 +8,22 @@ from PIL import Image
 # input parameters
 input_file = 'yv60s-o2552.wav'
 output_file = 'test.wav'
-aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
-openai.api_key = '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'
-set_api_key("e47386203d3800a7d57840c1649afb38")
+# aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
+# openai.api_key = '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'
+# set_api_key("e47386203d3800a7d57840c1649afb38")
 
+input_file = st.file_uploader("Choose a file")
+if input_file is not None:
+    # To read file as bytes:
+    # bytes_data = uploaded_file.getvalue()
+    # st.write(bytes_data)
 # host on web
-audio_file = open(input_file, 'rb')
-audio_bytes = audio_file.read()
-st.write("Input audio file")
-st.audio(audio_bytes)
+	audio_file = open(input_file, 'rb')
+	audio_bytes = audio_file.read()
+	st.write("Input audio file")
+	st.audio(audio_bytes)
 
-# speech to text
+'''# speech to text
 transcriber = aai.Transcriber()
 transcript = transcriber.transcribe(input_file)
 st.write(f'output of wav file: {transcript.text}')
@@ -47,7 +52,7 @@ save(audio,output_file)
 st.write("Output audio file")
 audio_file = open(output_file, 'rb')
 audio_bytes = audio_file.read()
-st.audio(audio_bytes)
+st.audio(audio_bytes)'''
 
 # pipeline diagram
 image = Image.open('worlflow.png')
