@@ -71,37 +71,3 @@ def main():
 main()
 
 
-
-
-'''# speech to text
-transcriber = aai.Transcriber()
-transcript = transcriber.transcribe(input_file)
-st.write(f'output of wav file: {transcript.text}')
-
-# text translation
-messages = [ {"role": "system", "content":
-			"You are a intelligent assistant."} ]
-message = "convert this speech to Hindi:" + transcript.text 
-if message:
-	messages.append(
-	{"role": "user", "content": message},
-	)
-	chat = openai.ChatCompletion.create(
-		model="gpt-3.5-turbo", messages=messages
-	)
-reply = chat.choices[0].message.content
-st.write(f"ChatGPT(Hindi): {reply}")
-
-# text to speech
-audio = generate(
-    text=reply,
-    voice="Arnold", model='eleven_multilingual_v1')
-save(audio,output_file)
-
-# web demo
-st.write("Output audio file")
-audio_file = open(output_file, 'rb')
-audio_bytes = audio_file.read()
-st.audio(audio_bytes)'''
-
-
