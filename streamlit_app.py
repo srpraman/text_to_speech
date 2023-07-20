@@ -36,7 +36,7 @@ def tts(output_text):
 	# save(audio,output_file_name)
 	# return output_file_name
 	save(audio, 'temp1.wav')
-	return "temp1.wav"
+	return audio
 	
 
 def main():
@@ -54,7 +54,7 @@ def main():
 		otext = ttt(itext, key)
 		st.write(f"Hindi Translation: {otext}")
 
-		output_file = tts(otext).read()
+		output_file = tts(otext)
 		st.write("Output audio file")
 		st.audio(output_file, format='audio/wav')
 
