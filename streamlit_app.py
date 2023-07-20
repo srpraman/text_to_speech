@@ -35,17 +35,14 @@ def tts(output_text):
     voice="Arnold", model='eleven_multilingual_v1')
 	# save(audio,output_file_name)
 	# return output_file_name
-	return audio
+	save(audio, 'temp1.wav')
+	return "temp1.wav"
+	
 
 def main():
 
 	input_file = st.file_uploader("Choose a file")
 	if input_file is not None:
-		with NamedTemporaryFile(suffix="wav") as temp:
-			temp.write(input_file.getvalue())
-			temp.seek(0)
-        	# result = model.transcribe(temp.name)
-		
 		audio_bytes = input_file.read()
 		st.write("Input audio file")
 		st.audio(audio_bytes, format='audio/wav')
