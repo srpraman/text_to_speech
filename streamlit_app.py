@@ -17,10 +17,9 @@ if input_file is not None:
     # bytes_data = uploaded_file.getvalue()
     # st.write(bytes_data)
 # host on web
-	audio_file = open(input_file, 'rb')
-	audio_bytes = audio_file.read()
+	audio_bytes = input_file.read()
 	st.write("Input audio file")
-	st.audio(audio_bytes)
+	st.audio(audio_bytes, format='audio/wav')
 
 '''# speech to text
 transcriber = aai.Transcriber()
