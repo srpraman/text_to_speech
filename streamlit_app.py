@@ -4,7 +4,7 @@ import assemblyai as aai
 import openai
 from elevenlabs import generate, play, set_api_key, save
 from PIL import Image
-
+from tempfile import NamedTemporaryFile
 
 def stt(input_audio):
 	aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
@@ -41,16 +41,19 @@ def main():
 
 	input_file = st.file_uploader("Choose a file")
 	if input_file is not None:
+		with NamedTemporaryFile(suffix="wav") as temp:
+			temp.write(input_file.getvalue())
+			temp.seek(0)
+        	# result = model.transcribe(temp.name)
+
 		audio_bytes = input_file.read()
 		st.write("Input audio file")
 		st.audio(audio_bytes, format='audio/wav')
 		
-		key = st.text_input('Movie title', 'Life of Brian')
-		# st.write('The current movie title is', title)
-		
-		itext = stt(audio_bytes)
+		itext = stt(temp.name)
 		st.write(f'Transcript of your input file: {itext}')
 
+		key = st.text_input('Movie title', 'put the chatgpt api key here')
 		otext = ttt(itext, key)
 		st.write(f"Hindi Translation: {otext}")
 
@@ -60,7 +63,7 @@ def main():
 
 	else:
 		# pipeline diagram
-		st.write("Invalid file!!!!")
+		st.write("Nothing has been uploaded!!!!")
 
 	image = Image.open('worlflow.png')
 	st.image(image, caption='FLow Diagram')
