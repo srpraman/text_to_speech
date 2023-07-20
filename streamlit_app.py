@@ -29,7 +29,7 @@ def ttt(input_text, key, command = 'convert this speech to Hindi:'):
 	return reply
 
 def tts(output_text):
-	set_api_key("e47386203d3800a7d57840c1649afb38")
+	set_api_key("7ac11a92ad2fb0994f331ff7769911cd")
 	audio = generate(
     text=output_text,
     voice="Arnold", model='eleven_multilingual_v1')
@@ -53,7 +53,7 @@ def main():
 		itext = stt("temp1.wav")
 		st.write(f'Transcript of your input file: {itext}')
 
-		key = st.text_input('Movie title', 'put the chatgpt api key here')
+		key = st.text_input('chatgpt api key', 'type here...')
 		otext = ttt(itext, key)
 		st.write(f"Hindi Translation: {otext}")
 
