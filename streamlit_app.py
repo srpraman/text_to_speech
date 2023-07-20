@@ -45,12 +45,12 @@ def main():
 			temp.write(input_file.getvalue())
 			temp.seek(0)
         	# result = model.transcribe(temp.name)
-
+		
 		audio_bytes = input_file.read()
 		st.write("Input audio file")
 		st.audio(audio_bytes, format='audio/wav')
-		
-		itext = stt(temp.name)
+		save(audio_bytes, 'temp1.wav')
+		itext = stt("temp1.wav")
 		st.write(f'Transcript of your input file: {itext}')
 
 		key = st.text_input('Movie title', 'put the chatgpt api key here')
