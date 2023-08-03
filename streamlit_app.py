@@ -62,9 +62,6 @@ def main():
 		# pipeline diagram
 		st.write("Nothing has been uploaded!!!!")
 
-	image = Image.open('workflow.png')
-	st.image(image, caption='Flow Diagram')
-
 main()
 
 
