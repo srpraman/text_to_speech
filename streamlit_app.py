@@ -6,6 +6,7 @@ from elevenlabs import generate, play, set_api_key, save
 from PIL import Image
 from tempfile import NamedTemporaryFile
 
+
 def stt(input_audio):
 	aai.settings.api_key = "b976ef9d17e34196ab337daa2d0ae9eb"
 	transcriber = aai.Transcriber()
@@ -13,11 +14,11 @@ def stt(input_audio):
 	return transcript.text
 
 # text to text translation
-def ttt(input_text, key, command = 'convert this speech to spanish:'):
+def ttt(input_text, key, command = 'hindi'):
 	openai.api_key = key
 	messages = [ {"role": "system", "content":
 			"You are a intelligent assistant."} ]
-	message = command + input_text 
+	message = 'convert this speech to ' + command + ":" + input_text 
 	if message:
 		messages.append(
 		{"role": "user", "content": message},
@@ -51,8 +52,9 @@ def main():
 		st.write(f'Transcript of your input file: {itext}')
 
 		key = st.text_input('chatgpt api key', 'type here...')
-		otext = ttt(itext, key)
-		st.write(f"Hindi Translation: {otext}")
+		lang = st.text_input('Language you wanted to translate to', 'e.g. hindi/spanish')
+		otext = ttt(itext, key, command = lang)
+		st.write(f"{lang} Translation: {otext}")
 
 		output_file = tts(otext)
 		st.write("Output audio file")
@@ -61,6 +63,9 @@ def main():
 	else:
 		# pipeline diagram
 		st.write("Nothing has been uploaded!!!!")
+
+	image = Image.open('workflow.png')
+	st.image(image, caption='Flow Diagram')
 
 main()
 
