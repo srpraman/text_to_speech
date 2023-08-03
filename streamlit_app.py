@@ -13,7 +13,7 @@ def stt(input_audio):
 	return transcript.text
 
 # text to text translation
-def ttt(input_text, key, command = 'convert this speech to Hindi:'):
+def ttt(input_text, key, command = 'convert this speech to spanish:'):
 	openai.api_key = key
 	messages = [ {"role": "system", "content":
 			"You are a intelligent assistant."} ]
@@ -63,7 +63,7 @@ def main():
 		st.write("Nothing has been uploaded!!!!")
 
 	image = Image.open('worlflow.png')
-	st.image(image, caption='FLow Diagram')
+	st.image(image, caption='Flow Diagram')
 
 main()
 
