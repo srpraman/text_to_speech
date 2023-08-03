@@ -14,8 +14,8 @@
 **->  As the workflow diagram suggests, there are three key components which are working together.** 
    1. When you upload an audio file, it will use the AssemblyAI speech to text API key and immediately converts that audio file into to a transcript text file.
    2. Using OpenAI API key, the above transcript will get translated to Hindi (by default).
-   3. At the end this translated text will be converted back to an audio file using ElevenLabs API key.     
-
+   3. At the end this translated text will be converted back to an audio file using ElevenLabs API key.
+   4. Lastly this app is hosted on streamlit community server. 
 ## API keys
 ```
 You are goinng to need three API keys to run this web app.
